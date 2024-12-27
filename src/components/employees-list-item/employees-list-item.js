@@ -15,8 +15,7 @@ const EmployeesListItem = () => {
         </button>
 
         <button type="button" className="btn-star btn-sm">
-          {/* <i className="fas fa-star"></i> */}
-          <i class="fa-regular fa-star"></i>
+          <i class="fas fa-solid fa-star"></i>
         </button>
       </div>
     </li>
