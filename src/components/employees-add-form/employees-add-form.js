@@ -1,18 +1,33 @@
+import { Component } from 'react'
+
 import './employees-add-form.css'
-import {Component} from 'react'
 
 class EmployeesAddForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name: '',
-      slalary: ''
+      salary: ''
     }
   }
 
   onValueChange = (e) => {
     this.setState({
       [e.target.name] : e.target.value
+    })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    if (this.state.name.length < 3 || !this.state.salary) return;
+
+    this.props.onAdd(this.state);
+
+    this.setState({
+        name: '',
+        salary: ''
     })
   }
 
@@ -24,7 +39,8 @@ class EmployeesAddForm extends Component {
         <h3>Add a new employee</h3>
 
         <form action="POST"
-              className="add-form d-flex">
+              className="add-form d-flex"
+              onSubmit={this.onSubmit}>
             <input type="text"
                    className="form-control new-post-lable"
                    placeholder="How is ther name?"
