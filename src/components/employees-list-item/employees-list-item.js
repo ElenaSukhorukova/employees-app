@@ -1,45 +1,24 @@
-import { Component } from 'react';
 
 import './employees-list-item.css';
 
-class EmployeesListItem extends Component {
-  constructor(props) {
-    super(props);
+const EmployeesListItem = ({ name, salary, increase, rise, onDelete, onToggleProp }) => {
+  const increaseClasss = increase ? ' increase' : ''
+  const like = rise ? ' like' : ''
+  let liClasses = "list-group-item d-flex justify-content-between" + increaseClasss + like
 
-    this.state = {
-      increase: props.increase,
-      rise: props.rise
-    }
-  }
-
-  onIncrease = () => {
-    this.setState(({increase}) => ({
-      increase: !increase
-    }));
-  }
-
-  onRise = () => {
-    this.setState(({rise}) => ({
-      rise: !rise
-    }));
-  }
-
-  render() {
-    const {name, salary, onDelete} = this.props;
-    const {increase, rise} = this.state
-
-    const increaseClasss = increase ? ' increase' : ''
-    const like = rise ? ' like' : ''
-    let liClasses = "list-group-item d-flex justify-content-between" + increaseClasss + like
-
-    return (
-      <li className={liClasses} >
-      <span className="list-group-item-lable" onClick={this.onRise}>{name}</span>
+  return (
+    <li className={liClasses}>
+      <span className="list-group-item-label"
+            onClick={onToggleProp}
+            data-toggle="rise">
+        {name}
+      </span>
       <input type="text" className="list-group-item-input" defaultValue={salary + "$"} />
       <div className="d-flex justify-content-center align-items-center">
         <button type="button"
                 className="btn-cookie btn-sm"
-                onClick={this.onIncrease}>
+                onClick={onToggleProp}
+                data-toggle="increase">
           <i className="fas fa-cookie"></i>
         </button>
 
@@ -52,8 +31,7 @@ class EmployeesListItem extends Component {
         <i className="fas fa-solid fa-star"></i>
       </div>
     </li>
-    );
-  }
+  );
 }
 
 export default EmployeesListItem;
