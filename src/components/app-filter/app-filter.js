@@ -10,30 +10,36 @@ const AppFilter = (props) => {
     {
       dataFilter: 'filterAll',
       className: (filterAll ? activeButtonClass : unactiveButtonClass),
-      lable: 'All employees'
+      lable: 'All employees',
+      colored: false
     },
     {
       dataFilter: 'filterProm',
       className: (filterProm ? activeButtonClass : unactiveButtonClass),
-      lable: 'For promotion'
+      lable: 'For promotion',
+      colored: false
     },
     {
       dataFilter: 'filterSalary',
       className: (filterSalary ? activeButtonClass : unactiveButtonClass),
-      lable: 'Salary more then 1000$'
+      lable: 'Salary more then 1000$',
+      colored: true
     }
   ]
 
   return (
     <div className="btn-group">
       {(
-        buttons.map(({className, dataFilter, lable}) => {
+        buttons.map(({className, dataFilter, lable, colored}) => {
+          const style = colored ? {color: 'red'} : null;
+
           return (
             <button
               className={"btn " + className}
               type="button"
               data-filter={dataFilter}
-              onClick={(e) => onFilter(e.currentTarget.getAttribute("data-filter"))}>
+              onClick={(e) => onFilter(e.currentTarget.getAttribute("data-filter"))}
+              style={style} >
               {lable}
             </button>
           );
